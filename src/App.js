@@ -18,6 +18,9 @@ function App() {
           Learn React
         </a>
       </header>
+      <div>
+        <p>asdfgwad</p>
+      </div>
     </div>
   );
 }
