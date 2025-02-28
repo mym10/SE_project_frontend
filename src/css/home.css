@@ -1,0 +1,32 @@
+body {
+    background-color: #040D21;
+    background-image: 
+        radial-gradient(circle at top left, rgba(58, 85, 139, 0.2), transparent), 
+        radial-gradient(circle at bottom right, rgba(142, 68, 173, 0.2), transparent);
+    color: white;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.page-content {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex: 1; 
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+}
+
+footer {
+    width: 100%;
+    padding: 10px 0;
+}
+
