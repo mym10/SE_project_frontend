@@ -5,8 +5,6 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 
-//app.js is the parent of everything. all are connected through app.js.
-//everytime you create a page, it HAS to come here in app.js.
 
 function App() {
   return (
