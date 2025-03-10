@@ -1,8 +1,10 @@
 import React from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { Box, Card, CardContent, Typography } from "@mui/material";
+import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Cards from "../components/Cards";
+import "../css/studentPage.css";
 
 const gpaData = [
   { semester: "Sem 1", gpa: 7.2 },
@@ -73,11 +75,16 @@ const semesterData = [
 ];
 
 const StudentPage = () => {
+  const {username} = useParams();
   const allBacklogs = semesterData.flatMap((sem) => sem.backlogs);
 
   return (
     <div style={{ background: "#0a0f2d", minHeight: "100vh", color: "white" }}>
       <Navbar />
+      {/* <div className="welcome-board">
+            <h1>Welcome, {username}!</h1>
+            <p>This is your personalized dashboard.</p>
+      </div> */}
       <Box sx={{ padding: "20px" }}>
         <Typography variant="h5" align="center" gutterBottom>
           Overall Semester-wise Performance

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Signup.css";
+import "../css/Signup.css";
+import { signupUser } from "../services/api";
 
 const Signup = ({ setIsLogin }) => {
     const [username, setUsername] = useState("");
@@ -9,12 +10,41 @@ const Signup = ({ setIsLogin }) => {
     const [role, setRole] = useState("");
     const [branch, setBranch] = useState("CSE");
     const [passwordError, setPasswordError] = useState("");
+    const [error, setError] = useState(""); // For error handling
     const navigate = useNavigate();
 
     const handleConfirmPasswordChange = (e) => {
-        setConfirmPassword(e.target.value);
-        setPasswordError(e.target.value !== password ? "Passwords do not match!" : "");
+        const newConfirmPassword = e.target.value;
+        setConfirmPassword(newConfirmPassword);
+        setPasswordError(newConfirmPassword !== password ? 
+            <span className="error-text">Passwords do not match!</span> : 
+            ""
+        );
     };
+    
+
+    const handleSignup = async () => {
+        if (password !== confirmPassword) {
+            setPasswordError("Passwords do not match!");
+            return;
+        }
+    
+        try {
+            const data = await signupUser({
+                Username: username, // Ensure capitalization matches backend
+                Name: username, // change it to name when student_details schema is created
+                Password: password,
+                Role: role,
+                Branch: branch,
+            });
+            alert(data.message || "Signup successful!");
+            setIsLogin(true);
+            navigate(`/${username}`);
+        } catch (error) {
+            setError(error.response?.data?.message || "Signup failed.");
+        }
+    };
+    
 
     return (
         <div className="container signup-container">
@@ -94,7 +124,7 @@ const Signup = ({ setIsLogin }) => {
             </div>
 
             <div className="signup-submit-container">
-                <button className="submit">sign up</button>
+                <button className="submit" onClick={handleSignup}>sign up</button>
             </div>
         </div>
     );
