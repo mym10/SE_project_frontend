@@ -1,11 +1,24 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Login.css";
+import "../css/Login.css";
+import { loginUser } from "../services/api";
 
 const Login = ({ setIsLogin }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState(""); // For error handling
     const navigate = useNavigate();
+
+    const handleLogin = async () => {
+        try {
+            const data = await loginUser(username, password);
+            alert(data.message || "Login successful!");
+            setIsLogin(true);
+            navigate(`/${username}`); // Change this route based on your app structure
+        } catch (error) {
+            setError(error);
+        }
+    };
 
     return (
         <div className="container login-container">
@@ -38,7 +51,7 @@ const Login = ({ setIsLogin }) => {
                 </span>
             </div>
             <div className="login-submit-container">
-                <button className="submit">Login</button>
+                <button className="submit" onClick={handleLogin}>Login</button>
             </div>
         </div>
     );

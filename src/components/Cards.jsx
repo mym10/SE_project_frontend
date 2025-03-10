@@ -19,7 +19,7 @@ const Cards = ({ semesterData }) => {
             position: "relative",
             "&:hover": { background: "#444" },
           }}
-          onClick={() => navigate(`/semester/${sem.semester}`)} 
+          onClick={() => navigate(`/${sem.semester}`)} 
         >
           <CardContent>
             {/* GPA in the Top Right Corner */}
