@@ -1,0 +1,56 @@
+.semester-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow-y: auto;
+    max-height: 100%;
+    padding: 20px;
+  }
+  
+  .chart-container {
+    width: 80%;
+    height: 400px;
+    margin-bottom: 20px;
+  }
+  
+  .table-container {
+    width: 80%;
+    margin: 20px auto;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  table, th, td {
+    border: 1px solid #ccc;
+  }
+  
+  th, td {
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .course-link {
+    color: #0066cc;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .course-link:hover {
+    color: #82ca9d;
+  }
+  
+  .pass {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .fail {
+    color: red;
+    font-weight: bold;
+  }
+  
