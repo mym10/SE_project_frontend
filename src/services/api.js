@@ -5,7 +5,7 @@ const API_URL = "http://localhost:5000"; // Replace with your backend URL
 // Login API
 export const loginUser = async (username, password) => {
     try {
-        const response = await axios.post(`${API_URL}/auth/login`, { 
+        const response = await axios.post(`${API_URL}/login`, { 
             Username: username, 
             Password: password 
         });
@@ -18,7 +18,7 @@ export const loginUser = async (username, password) => {
 // Signup API
 export const signupUser = async (userData) => {
     try {
-        const response = await axios.post(`${API_URL}/auth/signup`, userData, {
+        const response = await axios.post(`${API_URL}/signup`, userData, {
             headers: {
                 "Content-Type": "application/json",
             }
@@ -28,3 +28,5 @@ export const signupUser = async (userData) => {
         throw error;
     }
 };
+
+
