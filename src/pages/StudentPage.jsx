@@ -81,10 +81,10 @@ const StudentPage = () => {
   return (
     <div style={{ background: "#0a0f2d", minHeight: "100vh", color: "white" }}>
       <Navbar />
-      {/* <div className="welcome-board">
+      <div className="welcome-board">
             <h1>Welcome, {username}!</h1>
             <p>This is your personalized dashboard.</p>
-      </div> */}
+      </div>
       <Box sx={{ padding: "20px" }}>
         <Typography variant="h5" align="center" gutterBottom>
           Overall Semester-wise Performance
