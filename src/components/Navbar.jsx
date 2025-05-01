@@ -4,6 +4,7 @@ import { IoIosAnalytics } from "react-icons/io";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/navbar.css';
 import { FaUserCircle } from "react-icons/fa";
+import { useEffect } from "react";
 
 const Navbar = () => {
     const navigate = useNavigate();
@@ -25,8 +26,8 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
                     {pathname === "/" ? ( 
                         <div>
-                            <Link to="/login" className="btn btn-outline-light me-2">Login</Link>
-                            <Link to="/signup" className="btn btn-primary">Sign Up</Link>
+                            <button className="btn btn-outline-light me-2" onClick={() => navigate("/login")}>Login</button>
+                            <button  className="btn btn-primary" onClick={() => navigate("/signup")}>Signup</button>
                         </div>
                     ) : (
                         <div>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/Login.css";
 import { loginUser } from "../services/api";
+import { useEffect } from "react";
 
 const Login = ({ setIsLogin }) => {
     const [username, setUsername] = useState("");
@@ -9,14 +10,33 @@ const Login = ({ setIsLogin }) => {
     const [error, setError] = useState(""); // For error handling
     const navigate = useNavigate();
 
+    useEffect(() => {
+        console.log("Login component mounted");
+    }, []);      
+
+    // const handleLogin = async () => {
+    //     try {
+    //         console.log("Logging in")
+    //         const data = await loginUser(username, password);
+    //         alert(data.message || "Login successful!");
+    //         setIsLogin(true);
+    //         navigate(`/${username}`); // Change this route based on your app structure
+    //     } catch (error) {
+    //         setError(error);
+    //     }
+    // };
+
     const handleLogin = async () => {
         try {
+            console.log("Logging in", { username, password });
             const data = await loginUser(username, password);
+            console.log("Response:", data);
             alert(data.message || "Login successful!");
             setIsLogin(true);
-            navigate(`/${username}`); // Change this route based on your app structure
+            navigate(`/${username}`);
         } catch (error) {
-            setError(error);
+            console.error("Login error:", error);
+            setError(error.message || "Login failed.");
         }
     };
 
@@ -51,7 +71,10 @@ const Login = ({ setIsLogin }) => {
                 </span>
             </div>
             <div className="login-submit-container">
-                <button className="submit" onClick={handleLogin}>Login</button>
+            <button className="submit" type="button" onClick={() => { 
+                    console.log("Button clicked");
+                    handleLogin();
+                }}>Login</button>
             </div>
         </div>
     );
