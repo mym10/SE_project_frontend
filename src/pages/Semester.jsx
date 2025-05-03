@@ -1,152 +1,186 @@
-import React, { PureComponent } from 'react';
-import { 
-  RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, Tooltip, 
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Legend 
+import React, { useEffect, useState } from 'react';
+import axios from "axios";
+import {
+  RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, Tooltip,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Legend
 } from 'recharts';
 import Navbar from '../components/Navbar';
+import { useParams, useNavigate } from "react-router-dom";
 import '../css/semester.css';
 
-const data = [
-  { SNo: 1, courseCode: 'MA0101', courseName: 'Mathematics', totalMarks: 80, credit: 3.5, grade: 'A', percentage: 80.00, passFail: 'Pass' },
-  { SNo: 2, courseCode: 'CH1010', courseName: 'Chemistry', totalMarks: 70, credit: 3, grade: 'B+', percentage: 70.00, passFail: 'Pass' },
-  { SNo: 3, courseCode: 'CS3201', courseName: 'Software Engineering', totalMarks: 75, credit: 4, grade: 'B+', percentage: 75.00, passFail: 'Pass' },
-  { SNo: 4, courseCode: 'PH0111', courseName: 'Physics', totalMarks: 20, credit: 3, grade: 'F', percentage: 20.00, passFail: 'Fail' },
-  { SNo: 5, courseCode: 'HS0101', courseName: 'French', totalMarks: 45, credit: 1.5, grade: 'C', percentage: 45.00, passFail: 'Pass' },
-];
+const calculateGrade = (total) => {
+  if (total >= 90) return 'A+';
+  if (total >= 80) return 'A';
+  if (total >= 70) return 'B+';
+  if (total >= 60) return 'B';
+  if (total >= 50) return 'C';
+  return 'F';
+};
 
-export default class Semester extends PureComponent {
-  render() {
-    const gpaDistribution = [
-      { range: '0.0-1.0', students: 0 },
-      { range: '1.1-2.0', students: 0 },
-      { range: '2.1-3.0', students: 1 },
-      { range: '3.1-4.0', students: 2 },
-      { range: '4.1-5.0', students: 4 },
-      { range: '5.1-6.0', students: 5 },
-      { range: '6.1-7.0', students: 7 },
-      { range: '7.1-8.0', students: 10 },
-      { range: '8.1-9.0', students: 4 },
-      { range: '9.1-10.0', students: 1 },
-    ];
+const getStatus = (grade) => grade === 'F' ? 'Fail' : 'Pass';
 
-    const studentGPA = 6.67;
+const calculateGradePoint = (total) => {
+  if (total >= 90) return 10;
+  if (total >= 80) return 9;
+  if (total >= 70) return 8;
+  if (total >= 60) return 7;
+  if (total >= 50) return 6;
+  if (total >= 40) return 5;
+  return 0;
+};
 
-    return (
-      <div className="semester-container">
-        <Navbar/>
-        <h1><u>Semester 1</u></h1>
+const computeGPA = (courses) => {
+  let totalWeighted = 0;
+  let totalCredits = 0;
 
-        {/* Radar Chart */}
-        <h4>Radar Chart</h4>
-        <div style={{ width: '80%', height: '400px' }}>
-          <ResponsiveContainer width="100%" height="100%">
-            <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>
-              <PolarGrid />
-              <PolarAngleAxis dataKey="courseName" />
-              <PolarRadiusAxis domain={[0, 100]} />
-              <Radar dataKey="totalMarks" stroke="#00FFFF" fill="#00FFFF" fillOpacity={0.6} />
-              
-              {/* Custom Tooltip for Radar Chart */}
-              <Tooltip
-                formatter={(value) => [`${value} Marks`, 'Score']}
-                labelFormatter={(value) => `Subject: ${value}`}
-                content={({ payload }) => {
-                  if (payload && payload.length) {
-                    const { courseName, totalMarks } = payload[0].payload;
-                    return (
-                      <div className="custom-tooltip">
-                        <p>{courseName}: {totalMarks} Marks</p>
-                      </div>
-                    );
-                  }
-                  return null;
-                }}
-              />
-            </RadarChart>
-          </ResponsiveContainer>
-        </div>
+  courses.forEach((course) => {
+    const total = (
+      course.Minor1 * course["Minor1_Weightage (%)"] +
+      course.Minor2 * course["Minor2_Weightage (%)"] +
+      course.EndSem * course["EndSem_Weightage (%)"]
+    ) / 100;
 
-        {/* Subject Table */}
-        <h4>Subject GPA Table</h4>
-        <div className="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>S.No</th>
-                <th>Course Code</th>
-                <th>Course Name</th>
-                <th>Total marks</th>
-                <th>Credit Point</th>
-                <th>Grade</th>
-                <th>Percentage</th>
-                <th>Pass/Fail</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.map((item) => (
-                <tr key={item.SNo}>
-                  <td>{item.SNo}</td>
-                  <td><a href={`/Semester/${item.courseCode}`} className="course-link">{item.courseCode}</a></td>
-                  <td>{item.courseName}</td>
-                  <td>{item.totalMarks}</td>
-                  <td>{item.credit}</td>
-                  <td>{item.grade}</td>
-                  <td>{item.percentage.toFixed(2)}%</td>
-                  <td className={item.passFail === 'Pass' ? 'pass' : 'fail'}>{item.passFail}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+    const gradePoint = calculateGradePoint(total);
+    const credit = course.credit || 3;
 
-        {/* GPA Distribution Chart */}
-        <h4>GPA Distribution</h4>
-        <div className="chart-container">
-          <ResponsiveContainer width="100%" height={400}>
-            <LineChart data={gpaDistribution}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="range" />
-              <YAxis />
-              <Line type="monotone" dataKey="students" stroke="#00FFFF" activeDot={{ r: 6 }} />
-              
-              {/* Custom Tooltip for GPA Chart */}
-              <Tooltip
-                formatter={(value) => [`${value} Students`, 'Count']}
-                labelFormatter={(value) => `GPA Range: ${value}`}
-                content={({ payload }) => {
-                  if (payload && payload.length) {
-                    const { range, students } = payload[0].payload;
-                    return (
-                      <div className="custom-tooltip">
-                        <p>{`${students} students`}</p>
-                      </div>
-                    );
-                  }
-                  return null;
-                }}
-              />
+    totalWeighted += gradePoint * credit;
+    totalCredits += credit;
+  });
 
-              {/* Highlight Student GPA */}
-              <Line
-                type="monotone"
-                dataKey="students"
-                stroke="transparent"
-                dot={(props) => {
-                  const { cx, cy, payload } = props;
-                  const lowerBound = parseFloat(payload.range.split('-')[0]);
-                  const upperBound = parseFloat(payload.range.split('-')[1]);
+  return totalCredits ? totalWeighted / totalCredits : 0;
+};
 
-                  if (lowerBound <= studentGPA && studentGPA <= upperBound) {
-                    return <circle cx={cx} cy={cy} r={8} fill="red" />;
-                  }
-                  return null;
-                }}
-              />
-              <Legend />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
+const Semester = () => {
+  const { username, semNumber } = useParams();
+  const navigate = useNavigate();
+  const [semesterData, setSemesterData] = useState({});
+  const [studentGPA, setStudentGPA] = useState(6.67);
+  const [gpaDistribution, setGpaDistribution] = useState([]);
+
+  useEffect(() => {
+    axios.get(`http://localhost:5000/${username}/${semNumber}`)
+      .then((res) => {
+        setSemesterData(res.data);
+
+        const courses = Object.values(res.data)[0];
+        if (courses && courses.length > 0) {
+          const gpa = computeGPA(courses);
+          setStudentGPA(gpa);
+        }
+      })
+      .catch((err) => console.error(err));
+
+    axios.get(`http://localhost:5000/gpa-distribution/${semNumber}`)
+      .then((res) => {
+        setGpaDistribution(res.data);
+      })
+      .catch((err) => console.error(err));
+  }, [username, semNumber]);
+
+  return (
+    <div className="semester-container">
+      <Navbar />
+      <h1><u>{username}'s Semester Data</u></h1>
+
+      {Object.entries(semesterData).map(([semName, courses], index) => {
+        const radarData = courses.map((course, i) => {
+          const total = (
+            course.Minor1 * course["Minor1_Weightage (%)"] +
+            course.Minor2 * course["Minor2_Weightage (%)"] +
+            course.EndSem * course["EndSem_Weightage (%)"]
+          ) / 100;
+          return {
+            SNo: i + 1,
+            courseCode: course.courseCode,
+            courseName: course.courseCode,
+            totalMarks: Math.round(total),
+            credit: course.credit || 3,
+            grade: calculateGrade(total),
+            percentage: total,
+            passFail: getStatus(calculateGrade(total))
+          };
+        });
+
+        return (
+          <div key={index}>
+            <h2>{semName}</h2>
+
+            <h4>Radar Chart</h4>
+            <div style={{ width: '80%', height: '400px' }}>
+              <ResponsiveContainer width="100%" height="100%">
+                <RadarChart cx="50%" cy="50%" outerRadius="80%" data={radarData}>
+                  <PolarGrid />
+                  <PolarAngleAxis dataKey="courseName" />
+                  <PolarRadiusAxis domain={[0, 100]} />
+                  <Radar dataKey="totalMarks" stroke="#00FFFF" fill="#00FFFF" fillOpacity={0.6} />
+                  <Tooltip formatter={(value) => [`${value} Marks`, 'Score']} />
+                </RadarChart>
+              </ResponsiveContainer>
+            </div>
+
+            <h4>Subject GPA Table</h4>
+            <div className="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>S.No</th>
+                    <th>Course Code</th>
+                    <th>Course Name</th>
+                    <th>Total Marks</th>
+                    <th>Credit Point</th>
+                    <th>Grade</th>
+                    <th>Percentage</th>
+                    <th>Pass/Fail</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {radarData.map((item, i) => (
+                    <tr key={i}>
+                      <td>{item.SNo}</td>
+                      <td><a href={`/Semester/${item.courseCode}`} className="course-link">{item.courseCode}</a></td>
+                      <td>{item.courseName}</td>
+                      <td>{item.totalMarks}</td>
+                      <td>{item.credit}</td>
+                      <td>{item.grade}</td>
+                      <td>{item.percentage.toFixed(2)}%</td>
+                      <td className={item.passFail === 'Pass' ? 'pass' : 'fail'}>{item.passFail}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        );
+      })}
+
+      <h4>GPA Distribution</h4>
+      <div className="chart-container">
+        <ResponsiveContainer width="100%" height={400}>
+          <LineChart data={gpaDistribution}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="range" />
+            <YAxis />
+            <Line type="monotone" dataKey="students" stroke="#00FFFF" activeDot={{ r: 6 }} />
+            <Tooltip />
+            <Line
+              type="monotone"
+              dataKey="students"
+              stroke="transparent"
+              dot={(props) => {
+                const { cx, cy, payload } = props;
+                const [low, high] = payload.range.split('-').map(parseFloat);
+                if (low <= studentGPA && studentGPA <= high) {
+                  return <circle cx={cx} cy={cy} r={8} fill="red" />;
+                }
+                return null;
+              }}
+            />
+            <Legend />
+          </LineChart>
+        </ResponsiveContainer>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+export default Semester;

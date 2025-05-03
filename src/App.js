@@ -20,7 +20,7 @@ function App() {
         <Route path="/login" element={<Login setIsLogin={setIsLogin} />} />
         <Route path="/signup" element={<Signup setIsLogin={setIsLogin} />} />
         <Route path="/:username" element={<StudentPage />} />
-        <Route path="/semester" element={<Semester />} />
+        <Route path="/:username/:semNumber" element={<Semester />} />
       </Routes>
     </Router>
   );
