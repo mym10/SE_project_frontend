@@ -14,18 +14,6 @@ const Login = ({ setIsLogin }) => {
         console.log("Login component mounted");
     }, []);      
 
-    // const handleLogin = async () => {
-    //     try {
-    //         console.log("Logging in")
-    //         const data = await loginUser(username, password);
-    //         alert(data.message || "Login successful!");
-    //         setIsLogin(true);
-    //         navigate(`/${username}`); // Change this route based on your app structure
-    //     } catch (error) {
-    //         setError(error);
-    //     }
-    // };
-
     const handleLogin = async () => {
         try {
             console.log("Logging in", { username, password });

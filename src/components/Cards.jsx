@@ -3,7 +3,7 @@ import { Card, CardContent, Typography, Box } from "@mui/material";
 import { RadarChart, PolarGrid, PolarAngleAxis, Radar } from "recharts";
 import { useNavigate } from "react-router-dom"; 
 
-const Cards = ({ semesterData }) => {
+const Cards = ({ semesterData, username }) => {
   const navigate = useNavigate(); 
 
   return (
@@ -19,7 +19,9 @@ const Cards = ({ semesterData }) => {
             position: "relative",
             "&:hover": { background: "#444" },
           }}
-          onClick={() => navigate(`/${sem.semester}`)} 
+          onClick={() => {
+            navigate(`/${username}/${index + 1}`);
+          }}
         >
           <CardContent>
             {/* GPA in the Top Right Corner */}
