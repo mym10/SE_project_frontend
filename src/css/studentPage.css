@@ -4,6 +4,7 @@ body {
         radial-gradient(circle at top left, rgba(58, 85, 139, 0.2), transparent), 
         radial-gradient(circle at bottom right, rgba(142, 68, 173, 0.2), transparent);
     color: white;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
 }
 
 .welcome-board {
@@ -13,3 +14,35 @@ body {
     align-items: center;
     margin-top: 70px;
 }
+
+.bigger-container {
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 10px;
+  margin: 20px;
+  margin-bottom: 50px;
+  border-radius: 20px;
+
+}
+
+.backlog-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 10px;
+    color: #89CFF0;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    transition: background 0.3s;
+    border-radius: 8px;
+  }
+  
+  .backlog-item:hover {
+    background: rgba(0,0,0,0.7);
+  }
+  
+  .summplimentary {
+    font-size: 0.85rem;
+    color: white;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
