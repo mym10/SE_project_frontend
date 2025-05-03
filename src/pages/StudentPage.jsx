@@ -116,14 +116,15 @@ const StudentPage = () => {
   }, [username]);
 
   return (
-    <div style={{ background: "#0a0f2d", minHeight: "100vh", color: "white" }}>
+    <div style={{ minHeight: "100vh", color: "white" }}>
       <Navbar />
       <div className="welcome-board">
         <h1>Welcome, {username}!</h1>
         <p>This is your personalized dashboard.</p>
       </div>
       <Box sx={{ padding: "20px" }}>
-        <Typography variant="h5" align="center" gutterBottom>
+        <div className="bigger-container">
+        <Typography variant="h5" align="center" gutterBottom fontFamily={"Plus Jakarta Sans"}>
           Overall Semester-wise Performance
         </Typography>
 
@@ -131,8 +132,9 @@ const StudentPage = () => {
           sx={{
             background: "rgba(0, 0, 0, 0.4)",
             padding: "20px",
-            marginBottom: "20px",
-            borderRadius: "15px",
+            margin: "0px 40px 40px 40px",
+            borderRadius: "20px",
+            fontFamily:"Plus Jakarta Sans"
           }}
         >
           <CardContent>
@@ -144,22 +146,27 @@ const StudentPage = () => {
                 <Line
                   type="monotone"
                   dataKey="gpa"
-                  stroke="#82ca9d"
+                  stroke="#FF4EC7"
                   strokeWidth={2}
                 />
               </LineChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
+        </div>
 
         {/* Grid Layout for Cards */}
+        <div className="bigger-container">
+        <Typography variant="h5" align="center" gutterBottom fontFamily={"Plus Jakarta Sans"}>
+          Semester breakdown
+        </Typography>
         <Box
           sx={{
             display: "grid",
             gridTemplateColumns: "repeat(4, 1fr)",
             gap: "20px",
             justifyContent: "center",
-            padding: "20px",
+            margin: "0px 40px 40px 40px",
           }}
         >
           {semesterData.map((semester, index) => (
@@ -172,15 +179,17 @@ const StudentPage = () => {
             </div>
           ))}
         </Box>
+        </div>
 
         {/* Backlogs Section */}
-        <Box sx={{ marginTop: "40px", textAlign: "center" }}>
-          <Typography variant="h5" gutterBottom>
+        <div className="bigger-container">
+        <Box sx={{ textAlign: "center"}}>
+          <Typography variant="h5" gutterBottom fontFamily={"Plus Jakarta Sans"}>
             Backlogs
           </Typography>
           {backlogs.length === 0 ? (
             <Typography
-              sx={{ fontSize: "1.2rem", fontWeight: "bold", color: "white" }}
+              sx={{ fontSize: "1.2rem", fontWeight: "bold", color: "white", fontFamily:"Plus Jakarta Sans" }}
             >
               No Backlogs 🎉
             </Typography>
@@ -192,7 +201,7 @@ const StudentPage = () => {
                 background: "rgba(0, 0, 0, 0.4)",
                 padding: "20px",
                 borderRadius: "15px",
-                width: "50%",
+                width: "95%",
                 minWidth: "300px",
                 fontSize: "1.2rem",
                 fontWeight: "bold",
@@ -201,30 +210,16 @@ const StudentPage = () => {
             >
               <ul style={{ margin: 0, padding: 0, listStyleType: "none" }}>
                 {backlogs.map((subject, index) => (
-                  <li
-                    key={index}
-                    style={{
-                      padding: "12px 0",
-                      color: "#89CFF0",
-                      borderBottom: "1px solid rgba(255,255,255,0.2)",
-                      transition: "background 0.3s",
-                      borderRadius: "8px",
-                      paddingLeft: "10px",
-                    }}
-                    onMouseEnter={(e) =>
-                      (e.target.style.background = "rgba(255,255,255,0.2)")
-                    }
-                    onMouseLeave={(e) =>
-                      (e.target.style.background = "transparent")
-                    }
-                  >
+                  <li key={index} className="backlog-item">
                     {subject}
+                    <a className="summplimentary">Register for Supplimentary</a>
                   </li>
                 ))}
               </ul>
             </Box>
           )}
         </Box>
+        </div>
       </Box>
     </div>
   );

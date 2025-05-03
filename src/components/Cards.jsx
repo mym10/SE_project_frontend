@@ -12,35 +12,46 @@ const Cards = ({ semesterData, username }) => {
         <Card
           key={index}
           sx={{
-            background: "#222", 
+            background: "rgba(0, 0, 0, 0.4)", 
             padding: "20px",
             cursor: "pointer",
             textAlign: "center",
             position: "relative",
-            "&:hover": { background: "#444" },
+            "&:hover": { background: "rgba(0, 0, 0, 0.7)" },
+            borderRadius: "20px",
           }}
           onClick={() => {
             navigate(`/${username}/${index + 1}`);
           }}
         >
           <CardContent>
-            {/* GPA in the Top Right Corner */}
             <Typography 
               variant="body2" 
-              sx={{ position: "absolute", top: 10, right: 10, color: "#89CFF0", fontWeight: "bold" }}
-            >
-              GPA: {sem.gpa}
+              sx={{ position: "absolute", top: 10, right: 10, color: "#89CFF0", fontWeight: "bold", fontFamily:"Plus Jakarta Sans" }}
+            >GPA: {sem.gpa}
             </Typography>
-            
-            <Typography variant="h6" sx={{ marginBottom: "10px", color: "#00E0FF", fontWeight: "bold" }}>{sem.semester}</Typography>
-
-            <RadarChart width={180} height={180} data={sem.subjects}>
+            <Typography variant="h6" sx={{ marginBottom: "10px", color: "#89CFF0", fontWeight: "bold", fontFamily:"Plus Jakarta Sans" }}>{sem.semester}</Typography>
+            <RadarChart
+              cx="50%" 
+              cy="50%"
+              outerRadius={65}
+              width={250}
+              height={200}
+              data={sem.subjects}
+            >
               <PolarGrid />
-              <PolarAngleAxis dataKey="subject" tick={{ fill: "#E0E0E0", fontSize: 11 }} />
-              <Radar dataKey="score" stroke="#4FC3F7" fill="#20C997" fillOpacity={0.6} />
-        </RadarChart>
-
-
+              <PolarAngleAxis
+                dataKey="subject"
+                tick={{ fill: "#E0E0E0", fontSize: 10 }}
+                tickLine={false}
+              />
+              <Radar
+                dataKey="score"
+                stroke="#FF4EC7"
+                fill="#FF4EC7"
+                fillOpacity={0.6}
+              />
+            </RadarChart>
           </CardContent>
         </Card>
       ))}

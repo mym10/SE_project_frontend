@@ -4,6 +4,7 @@ import "../css/Signup.css";
 import { signupUser } from "../services/api";
 
 const Signup = ({ setIsLogin }) => {
+    const [name, setName] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -32,7 +33,7 @@ const Signup = ({ setIsLogin }) => {
         try {
             const data = await signupUser({
                 Username: username, // Ensure capitalization matches backend
-                Name: username, // change it to name when student_details schema is created
+                Name: name, // change it to name when student_details schema is created
                 Password: password,
                 Role: role,
                 Branch: branch,
@@ -59,6 +60,14 @@ const Signup = ({ setIsLogin }) => {
                         placeholder="Username" 
                         value={username} 
                         onChange={(e) => setUsername(e.target.value)} 
+                    />
+                </div>
+                <div className="input">
+                    <input 
+                        type="text" 
+                        placeholder="Name" 
+                        value={name} 
+                        onChange={(e) => setName(e.target.value)} 
                     />
                 </div>
                 <div className="input">
