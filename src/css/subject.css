@@ -1,0 +1,222 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #040D21;
+    background-image: 
+      radial-gradient(circle at top left, rgba(58, 85, 139, 0.2), transparent), 
+      radial-gradient(circle at bottom right, rgba(142, 68, 173, 0.2), transparent);
+    color: white;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+.subject-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    gap: 40px;
+}
+
+.subject-header {
+    padding-top: 40px;
+    margin-bottom: 30px;
+    text-align: center;
+    width: 100%;
+}
+
+.subject-header h2 {
+    font-size: 3.5rem;
+    font-weight: bold; 
+    margin: 0; 
+    padding-top: 70px;
+}
+
+.course-info h4 {
+    font-size: 2.2rem;
+    margin: 0;
+    padding-bottom: 15px;
+}
+
+.course-info {
+    margin-top: 10px;
+}
+
+.prof-link {
+    color: #1693ec;
+    text-decoration: none;
+    font-size: 2.2rem;
+}
+
+.prof-link:hover {
+    text-decoration: underline;
+}
+
+.charts-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 95%;
+    margin: 20px auto;
+    gap: 30px;
+}
+
+.piechart-inner-box {
+    width: 95%;
+    max-width: none;
+    height: 390px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.piechart-hover{
+    background: transparent;
+    color: rgb(207, 26, 173);
+}
+
+.assessment-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 10px;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+    padding-bottom: 40px;
+    padding-top: 40px;
+    font-size: 22px;
+}
+
+.assessment-buttons button {
+    margin: 0;
+    padding: 8px 16px;
+    border: 1px solid #007BFF;
+    background-color: transparent;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+}
+
+.assessment-buttons button.active,
+.assessment-buttons button:hover {
+    background-color: #4399f4;
+    color: white;
+}
+
+.linechart-inner-box {
+    width: 140%;
+    max-width: 1600px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+}
+
+.linechart-wrapper .red-dot {
+    fill: red;
+    r: 8px;
+}
+
+.marks-table {
+    width: 95%; /* Ensure the table takes full width of the container */
+    max-width: 1700px;
+    border-collapse: collapse;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 40px;
+}
+
+.marks-table th, .marks-table td {
+    padding: 15px; /* Increased padding for better readability */
+    text-align: center;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 1.2rem; /* Slightly increased font size */
+}
+
+.marks-table th {
+    font-weight: bold;
+    background: rgba(255, 255, 255, 0.1); /* Subtle background for headers */
+}
+
+.marks-table td {
+    background: rgba(0, 0, 0, 0.2); /* Subtle background for table cells */
+}
+
+.marks-table-inner-box {
+    width: 90%; /* Adjusted to match the width of other sections */
+    max-width: 1100px; /* Set a maximum width for better responsiveness */
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    padding: 20px; /* Increased padding for better spacing */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.distribution-title {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 5px;
+    font-size: 28px;
+    font-weight: 300;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.details-title {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 28px;
+    font-weight: 300;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.custom-tooltip {
+    background-color: transparent;
+    color: transparent;
+    font-weight: bold;
+    font-size: 16px; /* Adjust font size if needed */
+    border: none;
+    box-shadow: none;
+}
+
+.inner-box {
+    width: 100%;
+    max-width: none;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
