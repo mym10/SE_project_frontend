@@ -137,7 +137,7 @@ const Semester = () => {
                   {radarData.map((item, i) => (
                     <tr key={i}>
                       <td>{item.SNo}</td>
-                      <td><a href={`/Semester/${item.courseCode}`} className="course-link">{item.courseCode}</a></td>
+                      <td><a href={`/${username}/${semNumber}/${item.courseCode}`} className="course-link">{item.courseCode}</a></td>
                       <td>{item.courseName}</td>
                       <td>{item.totalMarks}</td>
                       <td>{item.credit}</td>
