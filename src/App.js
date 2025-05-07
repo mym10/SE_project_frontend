@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import StudentPage from "./pages/StudentPage";
 import Semester from './pages/Semester';
-import SubjectPage from './pages/SubjectPage'; // Add this line
-//app.js is the parent of everything. all are connected through app.js.
-//everytime you create a page, it HAS to come here in app.js.
-
+import SubjectPage from './pages/SubjectPage';
+import ForumPage from './pages/ForumPage'; // ✅ Add this line
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
@@ -23,6 +22,7 @@ function App() {
         <Route path="/:username" element={<StudentPage />} />
         <Route path="/:username/:semNumber" element={<Semester />} />
         <Route path="/:username/:semNumber/:subjectCode" element={<SubjectPage />} />
+        <Route path="/forum" element={<ForumPage />} /> {/* ✅ Forum route */}
       </Routes>
     </Router>
   );
