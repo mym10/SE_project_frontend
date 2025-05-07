@@ -1,0 +1,156 @@
+body, .forum-page {
+    background-color: #0d0f1a;
+    color: #ffffff;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .forum-container {
+    max-width: 1000px; /* widened from 800px */
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  h1, .forum-title {
+    text-align: center;
+    font-size: 2rem;
+    color: #ffffff;
+    margin-bottom: 20px;
+  }
+  
+  textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    background: #12131f;
+    border: 1px solid #2a2b3a;
+    color: #fff;
+    font-size: 1rem;
+    resize: none;
+  }
+  
+  textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 6px #3b82f6;
+  }
+  
+  .post-input {
+    margin-bottom: 20px;
+  }
+  
+  .post-controls {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #ccc;
+  }
+  
+  button {
+    padding: 8px 14px;
+    border-radius: 6px;
+    background-color: #1e90ff;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  button:hover {
+    background-color: #1c70d0;
+    box-shadow: 0 0 8px #1e90ff;
+  }
+  
+  .filter-section {
+    margin-bottom: 20px;
+    color: #ccc;
+  }
+  
+  select {
+    background-color: #12131f;
+    color: white;
+    border: 1px solid #444;
+    padding: 6px;
+    border-radius: 4px;
+  }
+  
+  .forum-card {
+    background-color: #1b1d2e;
+    padding: 16px;
+    margin-top: 16px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.05);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .forum-card:hover {
+    box-shadow: 0 0 12px rgba(59, 130, 246, 0.4); /* glow effect on hover */
+  }
+  
+  .forum-card h5 {
+    color: #1e90ff;
+    margin-bottom: 8px;
+  }
+  
+  .subject {
+    font-size: 0.9rem;
+    color: #888;
+  }
+  
+  .like-button {
+    background-color: transparent;
+    color: #60a5fa;
+    border: 1px solid #3b82f6;
+    border-radius: 20px;
+    padding: 6px 12px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    font-size: 0.95rem;
+  }
+  
+  .like-button:hover {
+    background-color: #1e40af;
+    color: #fff;
+    box-shadow: 0 0 8px #3b82f6;
+  }
+  
+  .comments {
+    margin-top: 12px;
+    border-top: 1px solid #2a2b3a;
+    padding-top: 10px;
+  }
+  
+  .comment {
+    margin-bottom: 8px;
+    color: #ddd;
+  }
+  
+  .comment-input {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  
+  .comment-input input {
+    flex: 1;
+    background-color: #12131f;
+    border: 1px solid #444;
+    color: white;
+    padding: 8px;
+    border-radius: 6px;
+  }
+  
+  .comment-input button {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    cursor: pointer;
+  }
+  
+  .comment-input button:hover {
+    background-color: #2563eb;
+  }
+  
