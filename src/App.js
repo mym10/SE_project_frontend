@@ -23,8 +23,8 @@ function App() {
         <Route path="/:username" element={<StudentPage />} />
         <Route path="/:username/:semNumber" element={<Semester />} />
         <Route path="/:username/:semNumber/:subjectCode" element={<SubjectPage />} />
-        <Route path="/forum" element={<ForumPage />} /> {/* ✅ Forum route */}
-        <Route path="/:subjectCode/professor/:professorID" element={<ProfPage />} />
+        <Route path="/forum" element={<ForumPage />} /> 
+        <Route path="/:username/:semNumber/:subjectCode/:professorID" element={<ProfPage />} />
       </Routes>
     </Router>
   );
