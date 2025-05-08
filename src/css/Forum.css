@@ -15,6 +15,7 @@ body, .forum-page {
     font-size: 2rem;
     color: #ffffff;
     margin-bottom: 20px;
+    margin-top: 20px;
   }
   
   textarea {
@@ -153,4 +154,3 @@ body, .forum-page {
   .comment-input button:hover {
     background-color: #2563eb;
   }
-  

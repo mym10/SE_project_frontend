@@ -4,12 +4,11 @@ import { IoIosAnalytics } from "react-icons/io";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/navbar.css';
 import { FaUserCircle } from "react-icons/fa";
-import { useEffect } from "react";
 
 const Navbar = () => {
     const navigate = useNavigate();
     const { pathname } = useLocation(); 
-    const {username} = useParams();
+    const { username } = useParams();
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark">
@@ -28,10 +27,18 @@ const Navbar = () => {
                     {pathname === "/" ? ( 
                         <div>
                             <button className="btn btn-outline-light me-2" onClick={() => navigate("/login")}>Login</button>
-                            <button  className="btn btn-primary" onClick={() => navigate("/signup")}>Signup</button>
+                            <button className="btn btn-primary" onClick={() => navigate("/signup")}>Signup</button>
                         </div>
                     ) : (
-                        <div>
+                        <div className="d-flex align-items-center">
+                            {/* Forum Button */}
+                            <button 
+                                className="btn btn-outline-light me-3" 
+                                onClick={() => navigate("/forum")}
+                            >
+                                Forum
+                            </button>
+                            {/* Profile Icon */}
                             <FaUserCircle 
                                 size="30px" 
                                 style={{ cursor: 'pointer' }} 
