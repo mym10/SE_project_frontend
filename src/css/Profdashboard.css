@@ -1,0 +1,189 @@
+body {
+    background-color: #040D21;
+    background-image: 
+        radial-gradient(circle at top left, rgba(58, 85, 139, 0.2), transparent), 
+        radial-gradient(circle at bottom right, rgba(142, 68, 173, 0.2), transparent);
+    color: white;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+.sprofile-container {
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 1200px;
+    margin-top: 100px;
+}
+
+.title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: #89CFF0;
+}
+
+.profile-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.profile-left {
+    margin-right: 20px;
+}
+
+.profile-icon {
+    color: #89CFF0;
+}
+
+.profile-right {
+    text-align: left;
+}
+
+.profile-right h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #89CFF0;
+}
+
+.profile-right p {
+    font-size: 1.2rem;
+    margin: 5px 0;
+}
+
+.bigger-container {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    margin: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    width: 96%;
+}
+
+table {
+    width: 100%;
+    min-width: 1050px;
+    border-collapse: collapse;
+    text-align: center;
+    color: white;
+}
+
+table th, table td {
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+table th {
+    font-size: 1.2rem;
+    color: #89CFF0;
+}
+
+table td {
+    font-size: 1rem;
+}
+
+table tr:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.line-inner-box {
+    background-color: rgba(0, 0, 0, 0.3); 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    color: #ffffff; 
+    
+}
+
+.distributionn-title {
+    color: white; 
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+}
+
+.linechart-wrapperr {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px; 
+}
+
+.linechart-inner-boxx {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow:0 4px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+}
+
+.tooltip-content {
+    height: 45px;
+    background-color: white;
+    color: rgb(207, 26, 173);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Assessment Buttons */
+.assessment-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.assessment-buttons button {
+  background-color: #2a2a3c;
+  color: #ffffff;
+  border: 1px solid #444;
+  padding: 8px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.assessment-buttons button:hover {
+  background-color: #3b82f6;
+}
+
+.assessment-buttons button.active {
+  background-color: #3b82f6;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.MuiDialog-paper {
+  background-color: #040D21 !important;
+  background-image: 
+    radial-gradient(circle at top left, rgba(58, 85, 139, 0.2), transparent), 
+    radial-gradient(circle at bottom right, rgba(142, 68, 173, 0.2), transparent);
+  color: #ffffff; 
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.course-link {
+  color: #89CFF0;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.course-link:hover {
+  color: #82ca9d;
+}
+
+.close-button {
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.3);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.close-button:hover {
+  background-color: #4399f4;
+  color: #ffffff;
+}
