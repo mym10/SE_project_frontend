@@ -48,7 +48,7 @@ const computeGPA = (courses) => {
       100;
 
     const gradePoint = calculateGradePoint(total);
-    const credit = course.credit || 3;
+    const credit = course.Credit ?? 3;
 
     totalWeighted += gradePoint * credit;
     totalCredits += credit;
@@ -83,7 +83,7 @@ const StudentPage = () => {
                 course.EndSem * course["EndSem_Weightage (%)"]) /
               100;
 
-            const credit = course.credit || 3;
+            const credit = course.Credit ?? 3;
             const grade = calculateGrade(total);
             const subjectObj = {
               subject: course.courseCode,
