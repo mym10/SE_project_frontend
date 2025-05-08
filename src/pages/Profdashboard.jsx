@@ -16,9 +16,9 @@ import {
 
 const ProfProfile = () => {
   const profileData = {
-    fullName: "Dr. John Doe",
-    professorID: "PROF123",
-    email: "johndoe@mahindrauniversity.edu.in",
+    fullName: "Dr. Neha Patel",
+    professorID: "MUF1117",
+    email: "muf1117@mahindrauniversity.edu.in",
     department: "Computer Science",
     branch: "CSE",
     coursesTaught: [
@@ -98,7 +98,7 @@ const ProfProfile = () => {
 
   return (
     <div className="sprofile-container">
-      <h1 className="title">Professor's Profile</h1>
+      <h1 className="title">Professor's Dashboard</h1>
 
       {/* Profile Details */}
       <div className="profile-main">

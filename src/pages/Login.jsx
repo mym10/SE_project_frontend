@@ -19,14 +19,17 @@ const Login = ({ setIsLogin }) => {
             console.log("Logging in", { username, password });
             const data = await loginUser(username, password);
             console.log("Response:", data);
-            //alert(data.message || "Login successful!");
+    
             setIsLogin(true);
-            navigate(`/${username}`);
+    
+            navigate(data.redirect);
+    
         } catch (error) {
             console.error("Login error:", error);
             setError(error.message || "Login failed.");
         }
     };
+    
 
     return (
         <div className="container login-container">

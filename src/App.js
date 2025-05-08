@@ -25,6 +25,7 @@ function App() {
         <Route path="/login" element={<Login setIsLogin={setIsLogin} />} />
         <Route path="/signup" element={<Signup setIsLogin={setIsLogin} />} />
         <Route path="/:username" element={<StudentPage />} />
+        <Route path="/professor/:username" element={<Profdashboard />} />
         <Route path="/:username/:semNumber" element={<Semester />} />
         <Route path="/:username/:semNumber/:subjectCode" element={<SubjectPage />} />
         <Route path="/forum" element={<ForumPage />} />
