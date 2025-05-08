@@ -1,38 +1,50 @@
-import React, { useState, useRef } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import '../css/Profpage.css';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Box, Typography } from '@mui/material';
+import axios from 'axios';
 
 const ProfPage = () => {
-  const navigate = useNavigate();
   const { professorID } = useParams();
 
+  const [professor, setProfessor] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [showAnonymousChat, setShowAnonymousChat] = useState(true);
-  const [isChatVisible, setIsChatVisible] = useState(false); // State to toggle chat visibility
-  const [isAnimating, setIsAnimating] = useState(false); // State to track animation
-  const chatBoxRef = useRef(null); // Ref for the chat box
+  const [isChatVisible, setIsChatVisible] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const chatBoxRef = useRef(null);
 
-  const professors = {
-    MUF1100: {
-      name: "Aarav Reddy",
-      email: "aarav.reddy@university.edu",
-      facultyID: "MUF1100",
-      department: "Mathematics",
-      officeHours: "Mon-Fri, 2:00 PM - 4:00 PM",
-      location: "Cabin 2, First floor, ECSOE",
-      courses: [
-        { id: "MA1101", name: "Calculus I" },
-        { id: "MA2201", name: "Linear Algebra" },
-      ],
-    },
-  };
+  // Fetch professor data on load
+  useEffect(() => {
+    const fetchProfessor = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/professors/by-id/${professorID}`)
+        const prof = response.data;
 
-  const professor = professors[professorID];
-  if (!professor) return <div className="profile-container">Professor not found.</div>;
+        setProfessor({
+          name: prof.Name,
+          email: `${prof.professorID.toLowerCase()}@mahindrauniversity.edu.in`,
+          facultyID: prof.professorID,
+          department: prof.Branch,
+          officeHours: 'Mon-Fri, 2:00 PM - 4:00 PM',
+          location: 'Cabin 2, First floor, ECSOE',
+          courses: prof.Courses.map(code => ({
+            id: code,
+            name: `${prof.Branch} (${code})`
+          }))
+        });
+      } catch (error) {
+        console.error('Error fetching professor data:', error);
+      }
+    };
+
+    fetchProfessor();
+  }, [professorID]);
+
+  if (!professor) return <div className="profile-container">Loading professor data...</div>;
 
   const handleSendMessage = () => {
     if (newMessage.trim() === '') return;
@@ -47,17 +59,18 @@ const ProfPage = () => {
 
   const handleChatToggle = () => {
     setIsChatVisible(!isChatVisible);
-    setIsAnimating(true); // Start animation
-    console.log('isChatVisible:', !isChatVisible); // Debugging
+    setIsAnimating(true);
     if (!isChatVisible) {
       setTimeout(() => {
         chatBoxRef.current?.scrollIntoView({ behavior: 'smooth' });
-      }, 100); // Delay to ensure the chat box is rendered
+      }, 100);
     }
   };
 
   const filteredMessages = messages.filter(
-    (msg) => (showAnonymousChat && msg.sender === 'Anonymous') || (!showAnonymousChat && msg.sender === 'You')
+    (msg) =>
+      (showAnonymousChat && msg.sender === 'Anonymous') ||
+      (!showAnonymousChat && msg.sender === 'You')
   );
 
   return (
@@ -113,7 +126,7 @@ const ProfPage = () => {
                     className="backlog-item"
                     style={{ cursor: 'pointer', padding: '10px 0' }}
                   >
-                    {course.name} ({course.id})
+                    {course.name}
                   </li>
                 ))}
               </ul>
@@ -130,15 +143,15 @@ const ProfPage = () => {
       </div>
 
       {/* Chat Section */}
-      {(isChatVisible || isAnimating) && (
+      {(isChatVisible) && ( // || isAnimating
         <div
           ref={chatBoxRef}
-          className={`chat-box ${isChatVisible ? 'slide-in-left' : 'slide-out-left'}`}
-          onAnimationEnd={() => {
-            if (!isChatVisible) {
-              setIsAnimating(false); // Stop rendering the chat box after the animation ends
-            }
-          }}
+          className={`chat-box `} //${isChatVisible ? 'slide-in-left' : 'slide-out-left'}
+          // onAnimationEnd={() => {
+          //   if (!isChatVisible) {
+          //     setIsAnimating(false);
+          //   }
+          // }}
         >
           <h3 className="chat-name">Chat with {professor.name}</h3>
           <div className="chat-inner-box">

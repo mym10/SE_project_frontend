@@ -20,6 +20,9 @@ export default function Subject() {
   const [error, setError] = useState(null);
   const [activeAssessment, setActiveAssessment] = useState('Overall');
   const [distributionData, setDistributionData] = useState({});
+  const [professorName, setProfessorName] = useState('');
+  const [professorID, setProfessorID] = useState('');
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,6 +43,22 @@ export default function Subject() {
     };
     fetchData();
   }, [username, semNumber, subjectCode]);
+
+  useEffect(() => {
+    const fetchProfessor = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/professors/${subjectCode}`);
+        setProfessorName(response.data.Name); 
+        setProfessorID(response.data.professorID);
+      } catch (err) {
+        console.error("Failed to fetch professor", err);
+        setProfessorName("Unknown");
+        setProfessorID("");
+      }
+    };
+    fetchProfessor();
+  }, [subjectCode]);
+
 
   const pieData = assessmentData.map(item => ({
     name: item.name,
@@ -64,7 +83,12 @@ export default function Subject() {
       <div className="subject-header">
         <h2>{subjectCode}</h2>
         <div className="course-info">
-          <h4>Student: {studentName}</h4>
+        <h4>
+          Professor:{" "}
+          <Link to={`/${username}/${semNumber}/${subjectCode}/${professorID}`}>
+            {professorName}
+          </Link>
+        </h4>
         </div>
       </div>
 
