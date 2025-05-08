@@ -10,7 +10,7 @@ body {
 .sprofile-container {
     padding: 20px;
     max-width: 1200px;
-    margin: 60px auto; 
+    margin: 20px auto;
     background-color: rgba(0, 0, 0, 0.3);
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
@@ -37,7 +37,6 @@ body {
     height: 120px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid #89CFF0; 
 }
 
 .profile-right h2 {
@@ -48,7 +47,7 @@ body {
 
 .profile-right p {
     margin-bottom: 12px;
-    color: #FFFFFF;
+    color: white;
 }
 
 .profile-right strong {
@@ -57,38 +56,90 @@ body {
 
 .bigger-container {
     background-color: rgba(0, 0, 0, 0.3);
-    padding: 10px 30px;
+    padding: 20px 30px; /* Increased padding for better spacing */
     margin: 0 auto 50px auto; 
     border-radius: 20px;
     width: calc(100% - 80px); 
     max-width: 1300px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Added shadow for better separation */
 }
 
-.bigger-container h2 {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #89CFF0; 
+.bigger-container h5 {
     text-align: center;
-    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #89CFF0;
+    margin-bottom: 20px; /* Space between heading and table */
 }
 
 .courses-table {
-    width: 80%;
+    width: 100%; /* Adjusted to take full width of the container */
     background-color: rgba(0, 0, 0, 0.3);
     border-collapse: collapse;
     border-radius: 20px;
     overflow: hidden;
+    margin-bottom: 40px; /* Space below each table */
 }
 
 .courses-table th,
 .courses-table td {
     padding: 12px;
-    text-align: left;
+    text-align: center; /* Centered text for better alignment */
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    color: white; 
+    color: #89CFF0;
 }
 
 .courses-table tr:hover {
     background: rgba(0, 0, 0, 0.7);
     cursor: pointer;
+}
+
+.title {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: white; 
+}
+
+/* Updated h2 style */
+h2 {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    color: #89CFF0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 20px;
+}
+
+/* Table container for consistent spacing */
+.table-container {
+    text-align: left;
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 20px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 1300px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    color: white;
+}
+
+.table-container table th,
+.table-container table td {
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.table-container table th {
+    font-weight: bold;
+}
+
+.table-container table tr:last-child td {
+    border-bottom: none;
 }

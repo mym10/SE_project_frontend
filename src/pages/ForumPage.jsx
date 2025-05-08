@@ -108,7 +108,7 @@ const Forum = () => {
 
   return (
     <div className="forum-page">
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="forum-container">
         <h1 className="forum-title">Open Student Forum</h1>
 

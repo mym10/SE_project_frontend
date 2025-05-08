@@ -20,11 +20,11 @@ const getSemesterFromCode = (code) => {
 const StudentProfile = () => {
   const { username } = useParams();
   const [profileData, setProfileData] = useState(null);
+  const [failingSubjects, setFailingSubjects] = useState([]);
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        // Step 1: Fetch profile
         const res = await axios.get(`http://localhost:5000/${username}/studentProfile`);
         const data = res.data;
 
@@ -35,17 +35,33 @@ const StudentProfile = () => {
           branch: data.Branch,
           year: "3",
           currentGPA: "Loading...",
-          enrolledCourses: data["Enrolled Courses"].map(code => ({
+          enrolledCourses: data["Enrolled Courses"].map((code) => ({
             id: code,
-            name: code
+            name: code,
           })),
         };
 
         setProfileData(profile);
 
-        // Step 2: Fetch GPA
         const gpaRes = await axios.get(`http://localhost:5000/${username}/gpa`);
-        setProfileData(prev => ({ ...prev, currentGPA: gpaRes.data.gpa }));
+        setProfileData((prev) => ({ ...prev, currentGPA: gpaRes.data.gpa }));
+
+        const failingSubjectsPromises = profile.enrolledCourses.map(async (course) => {
+          try {
+            const matchRes = await axios.get(
+              `http://localhost:5000/match-peers/${course.id}?studentID=${profile.studentID}`
+            );
+            return {
+              course: course.id,
+              matches: matchRes.data.matches,
+            };
+          } catch (err) {
+            return null;
+          }
+        });
+
+        const failingSubjectsResults = await Promise.all(failingSubjectsPromises);
+        setFailingSubjects(failingSubjectsResults.filter((result) => result && result.matches.length > 0));
       } catch (err) {
         console.error("Failed to fetch student profile or GPA:", err);
       }
@@ -57,7 +73,7 @@ const StudentProfile = () => {
   if (!profileData) return <div className="sprofile-container">Loading...</div>;
 
   const coursesBySemester = {};
-  profileData.enrolledCourses.forEach(course => {
+  profileData.enrolledCourses.forEach((course) => {
     const sem = getSemesterFromCode(course.id);
     if (!coursesBySemester[sem]) {
       coursesBySemester[sem] = [];
@@ -84,67 +100,80 @@ const StudentProfile = () => {
         </div>
       </div>
 
-      {/* Courses Table */}
+      {/* Enrolled Courses Table */}
       <div className="bigger-container">
-        <Box sx={{ textAlign: "center" }}>
-          <Typography variant="h5" gutterBottom fontFamily={"Plus Jakarta Sans"}>
-            Enrolled Courses
-          </Typography>
+        <Typography variant="h5" gutterBottom fontFamily={"Plus Jakarta Sans"} textAlign="center">
+          Enrolled Courses
+        </Typography>
 
-          {profileData.enrolledCourses.length === 0 ? (
-            <Typography sx={{ fontSize: "1.2rem", fontWeight: "bold", color: "white" }}>
-              No Courses Enrolled
-            </Typography>
-          ) : (
-            <Box sx={{
-              textAlign: "left",
-              display: "inline-block",
-              background: "rgba(0, 0, 0, 0.4)",
-              padding: "20px",
-              borderRadius: "15px",
-              width: "100%",
-              maxWidth: "1300px",
-              fontSize: "1.2rem",
-              fontWeight: "bold",
-              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
-            }}>
-              <Box sx={{
-                overflowX: "auto",
-                marginTop: "20px",
-                border: "1px solid rgba(255,255,255,0.2)",
-                borderRadius: "10px",
-              }}>
-                <table style={{
-                  width: "100%",
-                  borderCollapse: "collapse",
-                  textAlign: "center",
-                  color: "white"
-                }}>
-                  <thead>
-                    <tr>
-                      {Object.keys(coursesBySemester).map((sem, index) => (
-                        <th key={index} style={{ padding: "10px", borderBottom: "1px solid rgba(255,255,255,0.3)" }}>
-                          {sem}
-                        </th>
+        {profileData.enrolledCourses.length === 0 ? (
+          <Typography sx={{ fontSize: "1.2rem", fontWeight: "bold", color: "white" }} textAlign="center">
+            No Courses Enrolled
+          </Typography>
+        ) : (
+          <div className="table-container">
+            <table>
+              <thead>
+                <tr>
+                  {Object.keys(coursesBySemester).map((sem, index) => (
+                    <th key={index}>{sem}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  {Object.values(coursesBySemester).map((courseList, index) => (
+                    <td key={index}>
+                      {courseList.map((code, i) => (
+                        <div key={i}>{code}</div>
                       ))}
+                    </td>
+                  ))}
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+
+      {/* Failing Subjects and Mentors Table */}
+      <div className="bigger-container">
+        <Typography variant="h5" gutterBottom fontFamily={"Plus Jakarta Sans"} textAlign="center">
+          Failing Subjects and Mentors
+        </Typography>
+
+        {failingSubjects.length === 0 ? (
+          <Typography sx={{ fontSize: "1.2rem", fontWeight: "bold", color: "white" }} textAlign="center">
+            No failing subjects found.
+          </Typography>
+        ) : (
+          <div className="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Course ID</th>
+                  <th>Mentor Name</th>
+                  <th>Mentor ID</th>
+                  <th>Mentor Email</th>
+                  <th>Mentor Score</th>
+                </tr>
+              </thead>
+              <tbody>
+                {failingSubjects.flatMap((subject) =>
+                  subject.matches.map((match, i) => (
+                    <tr key={`${subject.course}-${i}`}>
+                      <td>{subject.course}</td>
+                      <td>{match.mentor.name}</td>
+                      <td>{match.mentor.id}</td>
+                      <td>{`${match.mentor.id}@mahindrauniversity.edu.in`}</td>
+                      <td>{match.mentor.finalScore}</td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      {Object.values(coursesBySemester).map((courseList, index) => (
-                        <td key={index} style={{ verticalAlign: "top", padding: "10px" }}>
-                          {courseList.map((code, i) => (
-                            <div key={i} style={{ padding: "5px 0" }}>{code}</div>
-                          ))}
-                        </td>
-                      ))}
-                    </tr>
-                  </tbody>
-                </table>
-              </Box>
-            </Box>
-          )}
-        </Box>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     </div>
   );
