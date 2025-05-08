@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { IoIosAnalytics } from "react-icons/io";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/navbar.css';
@@ -9,6 +9,7 @@ import { useEffect } from "react";
 const Navbar = () => {
     const navigate = useNavigate();
     const { pathname } = useLocation(); 
+    const {username} = useParams();
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark">
@@ -31,7 +32,11 @@ const Navbar = () => {
                         </div>
                     ) : (
                         <div>
-                            <FaUserCircle size="30px"/>
+                            <FaUserCircle 
+                                size="30px" 
+                                style={{ cursor: 'pointer' }} 
+                                onClick={() => navigate(`/${username}/studentProfile`)}
+                            />
                         </div>
                     )}
                 </div>

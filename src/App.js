@@ -10,6 +10,7 @@ import Semester from './pages/Semester';
 import SubjectPage from './pages/SubjectPage';
 import ForumPage from './pages/ForumPage'; // ✅ Add this line
 import ProfPage from './pages/ProfPage';
+import StudentProfile from './pages/StudentProfile';
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
@@ -25,6 +26,7 @@ function App() {
         <Route path="/:username/:semNumber/:subjectCode" element={<SubjectPage />} />
         <Route path="/forum" element={<ForumPage />} /> 
         <Route path="/:username/:semNumber/:subjectCode/:professorID" element={<ProfPage />} />
+        <Route path="/:username/studentProfile" element={<StudentProfile />} /> 
       </Routes>
     </Router>
   );
