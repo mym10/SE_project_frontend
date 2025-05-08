@@ -19,7 +19,7 @@ const Login = ({ setIsLogin }) => {
             console.log("Logging in", { username, password });
             const data = await loginUser(username, password);
             console.log("Response:", data);
-            alert(data.message || "Login successful!");
+            //alert(data.message || "Login successful!");
             setIsLogin(true);
             navigate(`/${username}`);
         } catch (error) {
@@ -34,6 +34,8 @@ const Login = ({ setIsLogin }) => {
                 <div className="text">Login</div>
                 <div className="underline"></div>
             </div>
+            
+            {error && <div className="error-message">{error}</div>}
             <div className="inputs">
                 <div className="input">
                     <input 
