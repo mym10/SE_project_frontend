@@ -27,17 +27,18 @@ body {
 }
 
 .subject-header {
-    padding-top: 40px;
-    margin-bottom: 30px;
+    padding-top: 20px; 
+    margin-bottom: 20px; 
     text-align: center;
     width: 100%;
 }
 
 .subject-header h2 {
-    font-size: 3.5rem;
+    font-size: 2.5rem; 
     font-weight: bold; 
     margin: 0; 
-    padding-top: 70px;
+    padding-top: 20px; 
+    padding-bottom: 40px;
 }
 
 .course-info h4 {
@@ -48,12 +49,16 @@ body {
 
 .course-info {
     margin-top: 10px;
+    margin-bottom: 0; 
+    margin-top: -30px;
 }
 
 .prof-link {
     color: #1693ec;
     text-decoration: none;
     font-size: 2.2rem;
+    margin-bottom: 0; 
+    display: inline-block; 
 }
 
 .prof-link:hover {
@@ -67,6 +72,7 @@ body {
     justify-content: center;
     width: 95%;
     margin: 20px auto;
+    margin-top: -40px;
     gap: 30px;
 }
 
@@ -92,13 +98,13 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: -50px;
     gap: 10px;
     padding: 0;
     background: none;
     box-shadow: none;
     padding-bottom: 40px;
-    padding-top: 40px;
+    padding-top: 50px;
     font-size: 22px;
 }
 
@@ -159,19 +165,19 @@ body {
 
 .marks-table th {
     font-weight: bold;
-    background: rgba(255, 255, 255, 0.1); /* Subtle background for headers */
+    background: rgba(255, 255, 255, 0.1); 
 }
 
 .marks-table td {
-    background: rgba(0, 0, 0, 0.2); /* Subtle background for table cells */
+    background: rgba(0, 0, 0, 0.2); 
 }
 
 .marks-table-inner-box {
-    width: 90%; /* Adjusted to match the width of other sections */
-    max-width: 1100px; /* Set a maximum width for better responsiveness */
+    width: 90%; 
+    max-width: 1100px; 
     background: rgba(0, 0, 0, 0.5);
     border-radius: 15px;
-    padding: 20px; /* Increased padding for better spacing */
+    padding: 20px; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     display: flex;
     justify-content: center;

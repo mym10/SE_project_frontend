@@ -80,7 +80,7 @@ const Semester = () => {
   return (
     <div className="semester-container">
       <Navbar />
-      <h1><u>{username}'s Semester Data</u></h1>
+      <h1>{username}'s Semester Data</h1>
 
       {Object.entries(semesterData).map(([semName, courses], index) => {
         const radarData = courses.map((course, i) => {
@@ -97,87 +97,108 @@ const Semester = () => {
             credit: course.credit || 3,
             grade: calculateGrade(total),
             percentage: total,
-            passFail: getStatus(calculateGrade(total))
+            passFail: getStatus(calculateGrade(total)),
           };
         });
 
         return (
-          <div key={index}>
-            <h2>{semName}</h2>
+          <div key={index} className="semester-section">
+            <h2 className="semester-title">{semName}</h2>
 
-            <h4>Radar Chart</h4>
-            <div style={{ width: '80%', height: '400px' }}>
-              <ResponsiveContainer width="100%" height="100%">
-                <RadarChart cx="50%" cy="50%" outerRadius="80%" data={radarData}>
-                  <PolarGrid />
-                  <PolarAngleAxis dataKey="courseName" />
-                  <PolarRadiusAxis domain={[0, 100]} />
-                  <Radar dataKey="totalMarks" stroke="#00FFFF" fill="#00FFFF" fillOpacity={0.6} />
-                  <Tooltip formatter={(value) => [`${value} Marks`, 'Score']} />
-                </RadarChart>
-              </ResponsiveContainer>
+            {/* Radar Chart Section */}
+            <div className="bigger-container">
+              <div className="chart-container">
+                <h4>Radar Chart</h4>
+                <div style={{ width: "100%", height: "400px" }}>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <RadarChart cx="50%" cy="50%" outerRadius="80%" data={radarData}>
+                      <PolarGrid />
+                      <PolarAngleAxis dataKey="courseName" />
+                      <PolarRadiusAxis domain={[0, 100]} />
+                      <Radar
+                        dataKey="totalMarks"
+                        stroke="#FF4EC7" 
+                        fill="#FF4EC7" 
+                        fillOpacity={0.6}
+                      />
+                      <Tooltip formatter={(value) => [`${value} Marks, "Score"`]} />
+                    </RadarChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
             </div>
 
-            <h4>Subject GPA Table</h4>
-            <div className="table-container">
-              <table>
-                <thead>
-                  <tr>
-                    <th>S.No</th>
-                    <th>Course Code</th>
-                    <th>Course Name</th>
-                    <th>Total Marks</th>
-                    <th>Credit Point</th>
-                    <th>Grade</th>
-                    <th>Percentage</th>
-                    <th>Pass/Fail</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {radarData.map((item, i) => (
-                    <tr key={i}>
-                      <td>{item.SNo}</td>
-                      <td><a href={`/${username}/${semNumber}/${item.courseCode}`} className="course-link">{item.courseCode}</a></td>
-                      <td>{item.courseName}</td>
-                      <td>{item.totalMarks}</td>
-                      <td>{item.credit}</td>
-                      <td>{item.grade}</td>
-                      <td>{item.percentage.toFixed(2)}%</td>
-                      <td className={item.passFail === 'Pass' ? 'pass' : 'fail'}>{item.passFail}</td>
+            {/* Subject GPA Table Section */}
+            <div className="bigger-container">
+              <div className="table-container">
+                <h4>Subject GPA Table</h4>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>S.No</th>
+                      <th>Course Code</th>
+                      <th>Course Name</th>
+                      <th>Total Marks</th>
+                      <th>Credit Point</th>
+                      <th>Grade</th>
+                      <th>Percentage</th>
+                      <th>Pass/Fail</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {radarData.map((item, i) => (
+                      <tr key={i}>
+                        <td>{item.SNo}</td>
+                        <td>
+                          <a
+                            href={`/${username}/${semNumber}/${item.courseCode}`}
+                            className="course-link"
+                          >
+                            {item.courseCode}
+                          </a>
+                        </td>
+                        <td>{item.courseName}</td>
+                        <td>{item.totalMarks}</td>
+                        <td>{item.credit}</td>
+                        <td>{item.grade}</td>
+                        <td>{item.percentage.toFixed(2)}%</td>
+                        <td
+                          className={
+                            item.passFail === "Pass" ? "pass" : "fail"
+                          }
+                        >
+                          {item.passFail}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         );
       })}
 
-      <h4>GPA Distribution</h4>
-      <div className="chart-container">
-        <ResponsiveContainer width="100%" height={400}>
-          <LineChart data={gpaDistribution}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="range" />
-            <YAxis />
-            <Line type="monotone" dataKey="students" stroke="#00FFFF" activeDot={{ r: 6 }} />
-            <Tooltip />
-            <Line
-              type="monotone"
-              dataKey="students"
-              stroke="transparent"
-              dot={(props) => {
-                const { cx, cy, payload } = props;
-                const [low, high] = payload.range.split('-').map(parseFloat);
-                if (low <= studentGPA && studentGPA <= high) {
-                  return <circle cx={cx} cy={cy} r={8} fill="red" />;
-                }
-                return null;
-              }}
-            />
-            <Legend />
-          </LineChart>
-        </ResponsiveContainer>
+      {/* GPA Distribution Section */}
+      <div className="bigger-container">
+        <div className="chart-container">
+          <h4>GPA Distribution</h4>
+          <ResponsiveContainer width="100%" height={400}>
+            <LineChart data={gpaDistribution}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="range" />
+              <YAxis />
+              <Line
+                type="monotone"
+                dataKey="students"
+                stroke="#FF4EC7" /* Pink stroke */
+                activeDot={{ r: 6 }}
+              />
+              <Tooltip />
+              <Legend />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
       </div>
     </div>
   );
