@@ -1,70 +1,152 @@
+# 📊 Student Score Visualization Portal
+
+A full-stack web application that visualizes student academic performance across exams, courses, semesters, and years. The portal provides comparative analytics, GPA breakdowns, and personalized recommendations. It also supports student-professor communication and a peer support forum.
+
+---
+
+## 🎯 Project Objectives
+
+- Enable students to track and analyze their performance with visual aids.
+- Identify academic strengths and weaknesses over time.
+- Provide peer recommendations for academic support.
+- Allow professors to upload, monitor, and evaluate student scores.
+- Foster anonymous and direct communication via chat and forum features.
+
+---
+
+## ✅ Features
+
+### 🧑‍🎓 Student Side
+
+- Semester-wise and subject-wise performance tracking.
+- Radar and line charts for GPA and marks visualization.
+- Subject breakdown with grades, credits, and pass/fail status.
+- Peer suggestion system based on academic strengths.
+- Anonymous community forum and direct messaging with professors.
+- Detailed student profile with enrolled course data.
+
+### 👩‍🏫 Professor Side
+
+- Dashboard to upload and manage student scores.
+- Course-wise and assessment-wise performance analytics.
+- Access to individual student details and communication tools.
+
+---
+
+## 🛠 Tech Stack
+
+### 🔹 Frontend
+
+- React.js
+- Tailwind CSS
+- Material-UI
+- Recharts
+
+### 🔸 Backend
+
+- Node.js
+- Express.js
+- MongoDB (with Mongoose)
+
+---
+
+## 📦 Setup Instructions
+
+### 🚀 Project Setup
+
+#### 1. Clone the Repositories
+
+# Frontend
+git clone https://github.com/mym10/SE_project_frontend
+cd SE_project_frontend
+
+# Backend
+git clone https://github.com/mym10/SE-project_backend.git
+cd SE-project_backend
+
+
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+## 🔧 Installation & Setup
 
-In the project directory, you can run:
+### 2. Install Frontend Dependencies & Start the Frontend
+````bash
+cd SE_project_frontend
+npm install
+npm start
+````
 
-### `npm start`
+### 3. Install Backend Dependencies & Start the Backend Server
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+cd SE-project_backend
+npm install
+node server.js
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 4. MongoDB Setup
 
-### `npm test`
+Ensure MongoDB is installed and running locally.
+You can use the following MongoDB URI:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+mongodb+srv://myth:2TbSL11j9CECYPfo@vosscluster.mp0lp.mongodb.net/student_scores
+```
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 📂 Project Structure
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+student-score-visualiser/
+├── Backend/
+│   ├── models/
+│   ├── node_modules/
+│   ├── routes/
+│   ├── .env
+│   ├── appConstants.js
+│   ├── db.js
+│   ├── package.json
+│   ├── package-lock.json
+│   └── server.js
+├── Frontend/
+│   ├── build/
+│   ├── node_modules/
+│   ├── public/
+│   ├── src/
+│   │   ├── css/
+│   │   ├── pages/
+│   │   ├── services/
+│   ├── .gitignore
+│   ├── package.json
+│   ├── package-lock.json
+│   └── README.md
+─ README.md
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 🎬 Demo Videos
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+* 📽 **3-Minute Presentation Video** 
+* 🧪 **Extended Demo + Local Setup Walkthrough**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 👥 Team Members – Team 17
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 🔹 Frontend
 
-## Learn More
+* M. Neha Reddy (SE22UCSE156)
+* Krithi P. (SE22UCSE144)
+* Niharika D. (SE22UCSE087)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 🔸 Backend
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+* Mythri Dantu (SE22UCSEE076)
+* Pramitha K. (SE22UCSE135)
+* Gayatri K. N. (SE22UCSE100)
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
